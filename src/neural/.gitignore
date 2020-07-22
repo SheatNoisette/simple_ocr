@@ -1,0 +1,7 @@
+*.py
+main.c
+maintest.c
+out/ 
+
+# Bloque les fichiers python
+# Bloque les .out

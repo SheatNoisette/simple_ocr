@@ -1,0 +1,39 @@
+# Override C compiler
+CC=emcc
+CFLAGS=-W -Wall -Wextra -std=c99 -O3 -MMD -D wasm=1
+EMFLAGS=-s WASM=1 
+SDLFLAGS = -s USE_SDL=2
+LDFLAGS=-lm
+SRC=$(wildcard src/*.c) \
+	$(wildcard src/bitmap/*.c) 	\
+	$(wildcard src/filters/*.c) \
+	$(wildcard src/neural/*.c)	\
+	$(wildcard src/commons/*.c)	\
+	$(wildcard src/recognition/*.c)
+
+OBJ = $(SRC:.c=.o)
+DEP = $(SRC:.c=.d)
+
+#-----------------------------
+# Renable SDL support if needed
+
+ifndef nosdl
+	CFLAGS += -D SDL
+	LDFLAGS += $(SDLFLAGS)
+endif
+
+all: ocr
+
+clean:
+	rm -rf bin/ocr.wasm
+	rm -rf bin/ocr.js
+	rm -rf $(OBJ) $(DEP)
+
+%.o: %.c
+	$(CC) $(CFLAGS) $(EMFLAGS) $(LDFLAGS) -o $@ -c $<
+
+ocr: clean $(OBJ)
+	@mkdir -p bin
+	$(CC) $(CFLAGS) $(EMFLAGS) $(OBJ) -o bin/ocr.js $(LDFLAGS)
+
+.PHONY: clean all

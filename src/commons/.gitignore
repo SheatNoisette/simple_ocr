@@ -1,0 +1,9 @@
+# Ignore unwanted files
+*_test.c
+*_test.h
+
+#vscode
+.vscode/
+
+# APP
+test
