@@ -10,8 +10,9 @@
 #include <time.h>
 #include <limits.h>
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
+
 #ifdef SDL
     #include <SDL2/SDL.h>
 #endif

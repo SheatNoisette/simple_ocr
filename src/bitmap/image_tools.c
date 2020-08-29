@@ -10,6 +10,11 @@
 #include <stdio.h>
 #include <math.h>
 
+/* Round support */
+#if _WIN32
+    #define roundf(value) floor(value + 0.5)
+#endif
+
 #include "image.h"
 #include "../commons/utils.h"
 #include "../commons/matrix.h"
@@ -116,8 +121,8 @@ image *image_resize_linear_interp
                     roundf((float)y / (float)new_height * (float)image_height);
             
             /* Avoid OoB */
-            new_x = min(new_x, image_width - 1);
-            new_y = min(new_y, image_height - 1);
+            new_x = u_min(new_x, image_width - 1);
+            new_y = u_min(new_y, image_height - 1);
 
             /* Copy pixel from original image */
             red = get_pixel(img, C_RED, new_x, new_y);

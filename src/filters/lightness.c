@@ -21,8 +21,8 @@ void i_grayscale_lightness(image *input){
             green_pixel = get_pixel(input, C_GREEN, x, y);
             blue_pixel = get_pixel(input, C_BLUE, x, y);
 
-            average = (max_3(red_pixel, green_pixel, blue_pixel) + 
-                        min_3(red_pixel, blue_pixel, green_pixel)) / 2;
+            average = (u_max_3(red_pixel, green_pixel, blue_pixel) + 
+                        u_min_3(red_pixel, blue_pixel, green_pixel)) / 2;
 
             set_pixel(input, x, y, average, average, average);
 

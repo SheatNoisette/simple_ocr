@@ -13,13 +13,13 @@
 /* --------------------------- */
 /*  Functions */
 
-int max(int val_1, int val_2);
+int u_max(int val_1, int val_2);
 
-int min(int val_1, int val_2);
+int u_min(int val_1, int val_2);
 
-int max_3 (int val_1, int val_2, int val_3);
+int u_max_3 (int val_1, int val_2, int val_3);
 
-int min_3 (int val_1, int val_2, int val_3);
+int u_min_3 (int val_1, int val_2, int val_3);
 
 
 #endif

@@ -14,7 +14,7 @@
 ** Return the biggest number between two values (val_1 and val_2)
 */
 
-int max(int val_1, int val_2){
+int u_max(int val_1, int val_2){
 
     if (val_1 > val_2)
         return val_1;
@@ -28,7 +28,7 @@ int max(int val_1, int val_2){
 ** Return the smallest number between two values (val_1 and val_2)
 */
 
-int min(int val_1, int val_2){
+int u_min(int val_1, int val_2){
 
     if (val_1 < val_2)
         return val_1;
@@ -41,9 +41,9 @@ int min(int val_1, int val_2){
 ** Return the biggest number between three values (val_1, val_2 and val_3)
 */
 
-int max_3 (int val_1, int val_2, int val_3){
+int u_max_3 (int val_1, int val_2, int val_3){
 
-    return max(val_1, max(val_2, val_3));
+    return u_max(val_1, u_max(val_2, val_3));
 }
 
 
@@ -52,8 +52,8 @@ int max_3 (int val_1, int val_2, int val_3){
 ** Return the smallest number between three values (val_1, val_2 and val_3)
 */
 
-int min_3 (int val_1, int val_2, int val_3){
+int u_min_3 (int val_1, int val_2, int val_3){
 
-    return min(val_1, min(val_2, val_3));
+    return u_min(val_1, u_min(val_2, val_3));
 }
 

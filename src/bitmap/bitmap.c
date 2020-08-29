@@ -1,11 +1,29 @@
 #include <stdio.h>
 #include <stddef.h>
 #include <stdlib.h>
-#include <err.h>
-#include <stdint.h>
 #include "image.h"
+
+/* Custom c types */
+
+#ifdef __gnu_linux__
+    #include <stdint.h>
+#else 
+    /* Generic platform */
+    #include "../types.h"
+#endif
+
+/* Sdl support */
 #ifdef SDL
-#include <SDL2/SDL.h>
+    #include <SDL2/SDL.h>
+#endif
+
+/* Errx support */
+#ifdef wasm 
+    #define errx(std, message) printf(message)
+#elif __gnu_linux__
+    #include <err.h>
+#else
+    #define errx(std, message) printf(message); exit(std);
 #endif
 
 /*
@@ -38,7 +56,7 @@ typedef struct {
         int32_t   yppm;            /* pixel per meter in the y axe */
         uint32_t  num_colors;      /* number of colors */
         uint32_t  important_colors;/* important colors */
-}BITmap_Header;
+} BITmap_Header;
 
 typedef struct{
         BITmap_Header header;

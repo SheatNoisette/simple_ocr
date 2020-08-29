@@ -6,19 +6,32 @@
 ** Started on  2019 SheatNoisette
 */
 
-/* Check if we try to compile to WASM */
-#ifdef wasm
-    #define errx(std, message) printf(message)
-#else
-    #include <err.h>
-#endif
-
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <getopt.h>
-#include <unistd.h>
 #include <time.h>
+
+/* Check if we try to compile to WASM */
+#ifdef wasm 
+    #define errx(std, message) printf(message)
+#elif __gnu_linux__
+    #include <err.h>
+#else
+    #define errx(std, message) printf(message); exit(std);
+#endif
+
+/* Posix API */
+#ifdef __gnu_linux__
+    #include <unistd.h>
+#endif
+
+/* Easy arg support on linux */
+#ifdef __gnu_linux__
+    #include <getopt.h>
+#elif _WIN32
+    #include "ports/getopt.h"
+#endif
+
 #ifdef SDL
     #include <SDL2/SDL.h>
 #endif
@@ -85,6 +98,9 @@ void cli_parse_commands(int argc, char **argv) {
         return;
     }
 
+#ifdef __gnu_linux__
+    /* Get opt command support */
+
     while((opt = getopt(argc, argv, ":i:hvosf:t:d:w:")) != -1)  
     {  
         /*  Image input */
@@ -113,6 +129,10 @@ void cli_parse_commands(int argc, char **argv) {
             printf("Unknown command\n");
         }
     }
+#else
+    /* Generic */
+
+#endif
     
     /* Train NN */
     if (train_nn) {
