@@ -17,6 +17,14 @@
 */
 void pretty_print_matrix(matrix *input) {
 
+    /* Iterators */
+    unsigned int x;
+    unsigned int y;
+
+    /* Matrix size */
+    unsigned int matrix_height;
+    unsigned int matrix_width;
+
     /* Check the matrix */
     if (input == NULL) {
         printf("[Matrix] Matrix print: Invalid matrix\n");
@@ -24,11 +32,11 @@ void pretty_print_matrix(matrix *input) {
     }
 
     /* Get size of the matrix */
-    unsigned int matrix_height = input->height;
-    unsigned int matrix_width = input->width;
+    matrix_height = input->height;
+    matrix_width = input->width;
 
-    for (unsigned int y = 0; y < matrix_height; y++) {
-        for (unsigned int x = 0; x < matrix_width; x++) {
+    for (y = 0; y < matrix_height; y++) {
+        for (x = 0; x < matrix_width; x++) {
             printf("%d ", get_value_matrix(input, x, y));
         }
 
@@ -42,15 +50,27 @@ void pretty_print_matrix(matrix *input) {
 
 float *matrix_to_float_array(matrix *input) {
 
-    unsigned int matrix_height = input->height;
-    unsigned int matrix_width = input->width;
+    /* Float array exported */
+    float *array;
 
-    /* Create the array
-    float *array = malloc(sizeof(float) * matrix_height * matrix_width);
+    /* Matrix size */
+    unsigned int matrix_height;
+    unsigned int matrix_width;
 
-    /* Iterate to fill the array
-    for (unsigned int y = 0; y < matrix_height; y++) {
-        for (unsigned int x = 0; x < matrix_width; x++) {
+    /* Iterators */
+    unsigned int y;
+    unsigned int x;
+
+    /* Set size from matrix input */
+    matrix_height = input->height;
+    matrix_width = input->width;
+
+    /* Create the array */
+    array = malloc(sizeof(float) * matrix_height * matrix_width);
+
+    /* Iterate to fill the array */
+    for (y = 0; y < matrix_height; y++) {
+        for (x = 0; x < matrix_width; x++) {
             array[x + matrix_width * y] = (float) get_value_matrix(input, x, y);
         }
     }

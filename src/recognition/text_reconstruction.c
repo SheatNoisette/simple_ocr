@@ -16,9 +16,10 @@
 /* Get the X average size of a char in pixel */
 unsigned long dt_get_average_char_size(l_list *input_pos, unsigned long number_chars) {
 
+    unsigned long cursor;
     unsigned long char_length = 0;
 
-    for (unsigned long cursor = 0; cursor < number_chars * 4; cursor += 4) {
+    for (cursor = 0; cursor < number_chars * 4; cursor += 4) {
         /*  X2 - X1 */
         char_length += (unsigned long)(list_get_value(input_pos, cursor + 2) 
                         - list_get_value(input_pos, cursor));
@@ -29,16 +30,15 @@ unsigned long dt_get_average_char_size(l_list *input_pos, unsigned long number_c
 
 /* Get the average distance between letters */
 unsigned long dt_get_average_char_spacing(l_list *input_pos, unsigned long number_chars) {
-    
-    /* Check number of char */
-    if (number_chars == 1)
-        return 0;
 
     /* Max iteration */
-    unsigned long max_char = (number_chars - 1) * 4;
+    unsigned long max_char;
 
     /* Length of the char */
     unsigned long char_length = 0;
+
+    /* Char cursor */
+    unsigned long cursor;
 
     /* a(x1, y1, x2, y2) - Char 1
        b(x1, y1, x2, y2) - Char 2
@@ -48,8 +48,15 @@ unsigned long dt_get_average_char_spacing(l_list *input_pos, unsigned long numbe
     int x2a;
     int x1b;
     int space;
+    
+    /* Check number of char */
+    if (number_chars == 1)
+        return 0;
 
-    for (unsigned long cursor = 0; cursor < max_char; cursor += 4) {
+    /* Max iteration */
+    max_char = (number_chars - 1) * 4;
+
+    for (cursor = 0; cursor < max_char; cursor += 4) {
         x2a = list_get_value(input_pos, cursor + 2);
         x1b = list_get_value(input_pos, cursor + 4);
         space = x1b - x2a;
@@ -93,11 +100,15 @@ l_list *deduct_text_structure (l_list *input_pos) {
     int x1b;
     int space;
 
+    /* Char cursor */
+    unsigned long cursor;
+    unsigned long index;
+
     /* If there is at least a letter add it */
     list_add(&t_structure, 1);
 
     /* Build the rest of the list */
-    for (unsigned long cursor = 0; cursor < max_char; cursor += 4) {
+    for (cursor = 0; cursor < max_char; cursor += 4) {
         x2a = list_get_value(input_pos, cursor + 2);
         x1b = list_get_value(input_pos, cursor + 4);
         space = x1b - x2a;
@@ -129,7 +140,7 @@ l_list *deduct_text_structure (l_list *input_pos) {
        char_detected); */
 
     /* Add missing characters if the system missed some */
-    for (unsigned long index = char_detected; index < number_char - 1; index++) {
+    for (index = char_detected; index < number_char - 1; index++) {
         list_add(&t_structure, 1);
     }
 

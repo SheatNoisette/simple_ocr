@@ -7,11 +7,12 @@
 /*  Randomizes neurone weights and biases. */
 void init_neurone(Neurone n)
 {
-    for(int i = 0; i < n.nbWeight; i++)
+    int i;
+    for(i = 0; i < n.nbWeight; i++)
     {
       n.weight[i] = randomize() - 0.5f;
     }
-    for(int i = 0; i < n.nbBias; i++)
+    for(i = 0; i < n.nbBias; i++)
     {
       n.bias[i] = randomize() - 0.5f;
     }
@@ -42,13 +43,15 @@ char printD(float* array, int size)
     char dataset[] = "0123456789abcdefghijklmnopqrstuvwxyz";
     float tab[36];
     int count = 0;
-    for(int i = 0; i < size; i++)
+    int i;
+    int j;
+    for(i = 0; i < size; i++)
     {
       /* printf("%f ", sigmoid(array[i])); */
       tab[i] = (sigmoid(array[i]));
     }
     /* printf("\n"); */
-    for(int j = 0; j < 36; j++)
+    for(j = 0; j < 36; j++)
     {
       if(tab[count] < tab[j])
       {

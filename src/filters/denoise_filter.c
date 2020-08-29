@@ -23,11 +23,15 @@ image* denoise_filter(image* input)
     /* Output image */
     image* output = NULL;
 
+    /* Iterators */
+    int i;
+    int j;
+
     /* Main convolution mask */
     matrix* convolution_mask = create_matrix(3,3);
 
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
+    for (i = 0; i < 3; i++) {
+        for (j = 0; j < 3; j++) {
             set_value_matrix(convolution_mask,i,j,1);
         }
     }

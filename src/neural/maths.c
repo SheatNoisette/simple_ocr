@@ -11,7 +11,8 @@
 /*  Prints an array of floats */
 void printN(float* array, int size)
 {
-    for(int i = 0; i < size; i++)
+	int i;
+    for(i = 0; i < size; i++)
     {
       printf("%f ",  (double) array[i]);
     }
@@ -73,7 +74,8 @@ float dMse_Loss(float y_true, float y_pred)
 float totalMse(float* neurone, float* output, int size)
 {
 	float sum = 0;
-	for(int i = 0; i < size; i++)
+	int i;
+	for(i = 0; i < size; i++)
 	{
 			sum += mse_loss(neurone[i], output[i]);
 	}

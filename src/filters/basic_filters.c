@@ -25,8 +25,11 @@ void i_grayscale_average(image *input){
 
     unsigned char average;
 
-    for (unsigned int x = 0; x < input->width; x++) {
-        for (unsigned int y = 0; y < input->height; y++) {
+    unsigned int x;
+    unsigned int y;
+
+    for (x = 0; x < input->width; x++) {
+        for (y = 0; y < input->height; y++) {
 
             red_pixel = get_pixel(input, C_RED, x, y);
             green_pixel = get_pixel(input, C_GREEN, x, y);
@@ -52,9 +55,11 @@ void i_grayscale_luminosity(image *input){
     unsigned char blue_pixel; 
 
     unsigned char color;
+    unsigned int x;
+    unsigned int y;
 
-    for (unsigned int x = 0; x < input->width; x++){
-        for (unsigned int y = 0; y < input->height; y++) {
+    for (x = 0; x < input->width; x++){
+        for (y = 0; y < input->height; y++) {
 
             red_pixel = get_pixel(input, C_RED, x, y);
             green_pixel = get_pixel(input, C_GREEN, x, y);

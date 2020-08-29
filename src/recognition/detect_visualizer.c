@@ -39,6 +39,9 @@ unsigned char r, unsigned char g, unsigned char b) {
 void visu_draw_y_char_pos (image *input, l_list *y_positions, int *border_box,
 unsigned char r, unsigned g, unsigned char b) {
 
+    /* Iterator */
+    unsigned long y;
+
     /* Get list length */
     unsigned long l_length = list_length(y_positions);
 
@@ -48,7 +51,7 @@ unsigned char r, unsigned g, unsigned char b) {
     }
 
     /* Draw horizontal lines - minmum border to max border */
-    for (unsigned long y = 0; y < l_length; y++) {
+    for (y = 0; y < l_length; y++) {
         image_draw_line_h(input, *(border_box), *(border_box + 2), 
         list_get_value(y_positions, y), r, g, b);
     } 
@@ -62,7 +65,10 @@ unsigned char r, unsigned g, unsigned char b) {
 void visu_draw_border_letter(image *input, l_list *char_list,
 unsigned char r, unsigned char g, unsigned char b) {
 
-    for (unsigned long i = 0; i < list_length(char_list); i+=4) {
+    /* Iterator */
+    unsigned long i;
+
+    for (i = 0; i < list_length(char_list); i+=4) {
         image_draw_rectangle(input,
         list_get_value(char_list, i),
         list_get_value(char_list, i + 1),
@@ -78,6 +84,9 @@ unsigned char r, unsigned char g, unsigned char b) {
 */
 void visu_text_structure(l_list *t_structure) {
 
+    /* Iterator */
+    unsigned long cursor;
+
     /* Get length of the list */
     unsigned long list_size = list_length(t_structure);
 
@@ -91,7 +100,7 @@ void visu_text_structure(l_list *t_structure) {
     }
 
     /* Build string visualization */
-    for (unsigned long cursor = 0; cursor < list_size; cursor++) {
+    for (cursor = 0; cursor < list_size; cursor++) {
         
         /* Space */
         if (list_get_value(t_structure, cursor) == 0)

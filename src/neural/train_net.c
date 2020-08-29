@@ -7,21 +7,24 @@
 /*  Feedforward */
 void feedforward(Neurone n, float* input)
 {
+    int i;
+    int j;
+    float sum;
     /*  For hidden layer */
-    for(int i = 0; i < n.nbHiddens; i++)
+    for(i = 0; i < n.nbHiddens; i++)
     {
-        float sum = 0.0f;
-        for(int j = 0; j < n.nbInputs; j++)
+        sum = 0.0f;
+        for(j = 0; j < n.nbInputs; j++)
         {
           sum += input[j] * n.weight[i * n.nbInputs + j];
         }
         n.hidden[i] = mish(sum + n.bias[0]);
     }
     /*  For output layer */
-    for(int i = 0; i < n.nbOutputs; i++)
+    for(i = 0; i < n.nbOutputs; i++)
     {
-        float sum = 0.0f;
-        for(int j = 0; j < n.nbHiddens; j++)
+        sum = 0.0f;
+        for(j = 0; j < n.nbHiddens; j++)
         {
           sum += n.hidden[j] * n.h2Lw[i * n.nbHiddens + j];
         }
@@ -32,20 +35,25 @@ void feedforward(Neurone n, float* input)
 /*  Update weights and bias */
 void backprop(Neurone n, float* input, float* neurone, float rate)
 {
-    for(int i = 0; i < n.nbHiddens; i++)
+    int i;
+    int j;
+    float sum;
+    float a;
+    float b;
+    for(i = 0; i < n.nbHiddens; i++)
     {
-        float sum = 0.0f;
+        sum = 0.0f;
         /*  Total error */
-        for(int j = 0; j < n.nbOutputs; j++)
+        for(j = 0; j < n.nbOutputs; j++)
         {
-            float a = dMse_Loss(n.output[j], neurone[j]);
-            float b = dMish(n.output[j]);
+            a = dMse_Loss(n.output[j], neurone[j]);
+            b = dMish(n.output[j]);
             sum += a * b * n.h2Lw[j * n.nbHiddens + i];
             /*  Correct weights in hidden to output layer. */
             n.h2Lw[j * n.nbHiddens + i] -= rate * a * b * n.hidden[i];
         }
         /*  Update weights */
-        for(int j = 0; j < n.nbInputs; j++)
+        for(j = 0; j < n.nbInputs; j++)
         {
           n.weight[i * n.nbInputs + j] -= rate * sum * dMish(n.hidden[i]) * input[j];
         }

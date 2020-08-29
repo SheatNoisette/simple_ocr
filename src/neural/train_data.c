@@ -48,7 +48,9 @@ char* readLines(FILE* file)
 float** new2d(int rows, int cols)
 {
     float** row = (float**) malloc((rows) * sizeof(float*));
-    for(int r = 0; r < rows; r++)
+    /* Rows */
+    int r;
+    for(r = 0; r < rows; r++)
     {
       row[r] = (float*) malloc((cols) * sizeof(float));
     }
@@ -67,10 +69,12 @@ Data newData(int nbInput, int nbOutput, int rows)
 /*  strtok : breaks string and remove 2nd param (of the function) in the string */
 void parse(Data data, char* line, int row)
 {
+    int i;
+    float val;
     int cols = data.nbInputs + data.nbOutputs;
-    for(int i = 0; i < cols; i++)
+    for(i = 0; i < cols; i++)
     {
-        float val = atof(strtok(i == 0 ? line : NULL, " "));
+        val = atof(strtok(i == 0 ? line : NULL, " "));
         if(i < data.nbInputs)
         {
           data.input[row][i] = val;
@@ -84,18 +88,21 @@ void parse(Data data, char* line, int row)
 
 /*  Parse file in order to get all input */
 Data build(char* path, int nbInput, int nbOutput)
-{
+{   
+    int rows;
+    int i;
+    char *line = NULL;
     FILE* file = fopen(path, "r");
     if(file == NULL)
     {
         printf("Could not open %s\n", path);
         exit(1);
     }
-    int rows = nbLines(file);
+    rows = nbLines(file);
     Data data = newData(nbInput, nbOutput, rows);
-    for(int i = 0; i < rows; i++)
+    for(i = 0; i < rows; i++)
     {
-        char* line = readLines(file);
+        line = readLines(file);
         parse(data, line, i);
         free(line);
     }
