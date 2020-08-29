@@ -23,13 +23,13 @@
 
 int main(int argc, char **argv)
 {
-    //Using GTK
+    /* Using GTK */
     #ifdef GTK
 
         if (argc == 1) {
             gui_run(argc, argv);
         } else {
-            //Parse command
+            /* Parse command */
             cli_parse_commands(argc, argv);
         }
 

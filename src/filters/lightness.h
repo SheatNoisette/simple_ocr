@@ -2,8 +2,8 @@
 #define BASIC_FILTERS_H
 
 #include "../bitmap/image.h"
-//-----------------------------
-// Functions
+/* -----------------------------
+   Functions */
 
 void i_grayscale_lightness(image *input);
 

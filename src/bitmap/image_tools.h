@@ -10,13 +10,13 @@
 #ifndef IMAGE_TOOLS_H
 #define IMAGE_TOOLS_H
 
-//Imports
+/* Imports  */
 #include <stddef.h>
 
 #include "image.h"
 
-//------------------------------
-// Functions
+/* ------------------------------ */
+/*  Functions */
 
 image *crop_image_at (
     image *img, unsigned int x1, unsigned int y1, 

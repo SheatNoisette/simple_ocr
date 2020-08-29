@@ -10,8 +10,8 @@
 #ifndef BASIC_FILTERS_H
 #define BASIC_FILTERS_H
 
-//-----------------------------
-// Functions
+/* ----------------------------- */
+/*  Functions */
 
 void i_grayscale_average(image *input);
 

@@ -1,19 +1,19 @@
 #ifndef TRAIN_DATA_H
 #define TRAIN_DATA_H
 
-// Data struct.
+/*  Data struct. */
 typedef struct Data Data;
 struct Data
 {
-    // array d'input à 2 dimensions.
+    /*  array d'input à 2 dimensions. */
     float** input;
-    // array de neurones à 2 dimensions.
+    /*  array de neurones à 2 dimensions. */
     float** neurone;
-    // Number of inputs to neural network.
+    /*  Number of inputs to neural network. */
     int nbInputs;
-    // Number of outputs to neural network.
+    /*  Number of outputs to neural network. */
     int nbOutputs;
-    // Number of rows in file (number of sets for neural network).
+    /*  Number of rows in file (number of sets for neural network). */
     int nbRows;
 };
 

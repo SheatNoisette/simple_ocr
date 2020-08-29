@@ -7,7 +7,7 @@
 ** Started on  2019 SheatNoisette
 */
 
-// Useful functions that doesn't require their own files
+/*  Useful functions that doesn't require their own files */
 
 /*
 ** Max

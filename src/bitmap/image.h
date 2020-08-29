@@ -10,13 +10,13 @@
 #ifndef IMAGE_H
 #define IMAGE_H
 
-//SDL Support
+/* SDL Support */
 #ifdef SDL
     #include <SDL2/SDL.h>
 #endif
 
-//----------------------------
-// Structures
+/* ---------------------------- */
+/*  Structures */
 
 typedef struct image_pixel pixel;
 typedef struct image_pixel color;
@@ -40,9 +40,9 @@ typedef enum  {
     C_BLUE
 } color_i;
 
-//----------------------------
+/* ---------------------------- */
 
-//SDL Support
+/* SDL Support */
 #ifdef SDL
     image *sdl_surface_to_image(SDL_Surface *input);
 

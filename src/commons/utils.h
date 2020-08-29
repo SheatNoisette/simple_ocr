@@ -10,8 +10,8 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-//---------------------------
-// Functions
+/* --------------------------- */
+/*  Functions */
 
 int max(int val_1, int val_2);
 

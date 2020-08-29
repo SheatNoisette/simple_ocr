@@ -4,10 +4,10 @@
 #include "maths.h"
 #include "train_net.h"
 
-// Feedforward
+/*  Feedforward */
 void feedforward(Neurone n, float* input)
 {
-    // For hidden layer
+    /*  For hidden layer */
     for(int i = 0; i < n.nbHiddens; i++)
     {
         float sum = 0.0f;
@@ -17,7 +17,7 @@ void feedforward(Neurone n, float* input)
         }
         n.hidden[i] = mish(sum + n.bias[0]);
     }
-    // For output layer
+    /*  For output layer */
     for(int i = 0; i < n.nbOutputs; i++)
     {
         float sum = 0.0f;
@@ -29,22 +29,22 @@ void feedforward(Neurone n, float* input)
     }
 }
 
-// Update weights and bias
+/*  Update weights and bias */
 void backprop(Neurone n, float* input, float* neurone, float rate)
 {
     for(int i = 0; i < n.nbHiddens; i++)
     {
         float sum = 0.0f;
-        // Calcul l'erreur totale
+        /*  Total error */
         for(int j = 0; j < n.nbOutputs; j++)
         {
             float a = dMse_Loss(n.output[j], neurone[j]);
             float b = dMish(n.output[j]);
             sum += a * b * n.h2Lw[j * n.nbHiddens + i];
-            // Correct weights in hidden to output layer.
+            /*  Correct weights in hidden to output layer. */
             n.h2Lw[j * n.nbHiddens + i] -= rate * a * b * n.hidden[i];
         }
-        // Update weights
+        /*  Update weights */
         for(int j = 0; j < n.nbInputs; j++)
         {
           n.weight[i * n.nbInputs + j] -= rate * sum * dMish(n.hidden[i]) * input[j];
@@ -52,7 +52,7 @@ void backprop(Neurone n, float* input, float* neurone, float rate)
     }
 }
 
-// Train the NN
+/*  Train the NN */
 float train_Neural(Neurone n, float* input, float* neurone, float rate)
 {
     feedforward(n, input);

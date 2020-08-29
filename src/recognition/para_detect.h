@@ -6,7 +6,7 @@
 **
 ** Started on  2019 SheatNoisette
 */
-//Paragraph detection
+/* Paragraph detection */
 
 #ifndef PARA_DETECT_H
 #define PARA_DETECT_H
@@ -14,8 +14,8 @@
 #include "../bitmap/image.h"
 #include "../commons/linked_list.h"
 
-//----------------------------
-//Functions
+/* ---------------------------- */
+/* Functions */
 
 int *r_get_paragraph_border(image *img);
 

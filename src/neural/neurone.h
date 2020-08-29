@@ -1,29 +1,29 @@
 #ifndef NEURON_H
 #define NEURON_H
 
-// Struct of a neurone
+/*  Struct of a neurone */
 typedef struct Neurone Neurone;
 struct Neurone
 {
-    // All the weights.
+    /*  All the weights. */
     float* weight;
-    // Hidden to output layer weights.
+    /*  Hidden to output layer weights. */
     float* h2Lw;
-    // Biases.
+    /*  Biases. */
     float* bias;
-    // Hidden layer.
+    /*  Hidden layer. */
     float* hidden;
-    // Output layer.
+    /*  Output layer. */
     float* output;
-    // Number of biases
+    /*  Number of biases */
     int nbBias;
-    // Number of weights.
+    /*  Number of weights. */
     int nbWeight;
-    // Number of inputs.
+    /*  Number of inputs. */
     int nbInputs;
-    // Number of hidden neurons.
+    /*  Number of hidden neurons. */
     int nbHiddens;
-    // Number of outputs.
+    /*  Number of outputs. */
     int nbOutputs;
 };
 

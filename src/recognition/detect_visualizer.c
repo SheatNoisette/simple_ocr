@@ -6,7 +6,7 @@
 **
 ** Started on  2019 SheatNoisette
 */
-// Visualize data on image
+/*  Visualize data on image */
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -22,7 +22,7 @@
 
 void visu_draw_border_box (image *input, int *border_box, 
 unsigned char r, unsigned char g, unsigned char b) {
-    //Draw the border box rectangle 
+    /* Draw the border box rectangle */
     image_draw_rectangle(input, 
         *(border_box),     /* x1 */
         *(border_box + 1), /* y1 */
@@ -39,16 +39,16 @@ unsigned char r, unsigned char g, unsigned char b) {
 void visu_draw_y_char_pos (image *input, l_list *y_positions, int *border_box,
 unsigned char r, unsigned g, unsigned char b) {
 
-    //Get list length
-    size_t l_length = list_length(y_positions);
+    /* Get list length */
+    unsigned long l_length = list_length(y_positions);
 
-    //Check if the list exists or contains data
+    /* Check if the list exists or contains data */
     if (l_length == 0) {
         return;
     }
 
-    //Draw horizontal lines - minmum border to max border
-    for (size_t y = 0; y < l_length; y++) {
+    /* Draw horizontal lines - minmum border to max border */
+    for (unsigned long y = 0; y < l_length; y++) {
         image_draw_line_h(input, *(border_box), *(border_box + 2), 
         list_get_value(y_positions, y), r, g, b);
     } 
@@ -62,7 +62,7 @@ unsigned char r, unsigned g, unsigned char b) {
 void visu_draw_border_letter(image *input, l_list *char_list,
 unsigned char r, unsigned char g, unsigned char b) {
 
-    for (size_t i = 0; i < list_length(char_list); i+=4) {
+    for (unsigned long i = 0; i < list_length(char_list); i+=4) {
         image_draw_rectangle(input,
         list_get_value(char_list, i),
         list_get_value(char_list, i + 1),
@@ -78,38 +78,38 @@ unsigned char r, unsigned char g, unsigned char b) {
 */
 void visu_text_structure(l_list *t_structure) {
 
-    //Get length of the list
-    size_t list_size = list_length(t_structure);
+    /* Get length of the list */
+    unsigned long list_size = list_length(t_structure);
 
-    //Allocate memory for string
+    /* Allocate memory for string */
     char *out_string = (char *)malloc(list_size * sizeof(char) + 1);
     
-    //Check malloc
+    /* Check malloc */
     if (out_string == NULL) {
         printf("[Visual] Failed to allocate memory for text structure");
         return;
     }
 
-    //Build string visualization
-    for (size_t cursor = 0; cursor < list_size; cursor++) {
+    /* Build string visualization */
+    for (unsigned long cursor = 0; cursor < list_size; cursor++) {
         
-        //Space
+        /* Space */
         if (list_get_value(t_structure, cursor) == 0)
             *(out_string + cursor) = ' ';
-        //Letter
+        /* Letter */
         else if (list_get_value(t_structure, cursor) == 1)
             *(out_string + cursor) = 'x';
         else
-            //Return
+            /* Return */
             *(out_string + cursor) = '\n';
     }
 
-    //Close string
+    /* Close string */
     *(out_string + list_size) = '\0';
 
-    // Print to terminal
+    /*  Print to terminal */
     printf("=== Text structure ===\n%s\n", out_string);
 
-    //Free string
+    /* Free string */
     free(out_string);
 }

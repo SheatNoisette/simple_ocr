@@ -62,7 +62,7 @@ void i_grayscale_luminosity(image *input){
 
             color = 0.21 * red_pixel + 0.72 * blue_pixel + 0.07 * green_pixel;
 
-            //Set every pixel like this
+            /* Set every pixel like this */
             set_pixel(input, x, y, color, color, color);
         }
     }

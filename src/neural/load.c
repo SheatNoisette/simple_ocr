@@ -4,7 +4,7 @@
 #include "neurone.h"
 #include "load.h"
 
-// Loads
+/*  Loads */
 Neurone load(char* path)
 {
     FILE* file = fopen(path, "r");
@@ -13,11 +13,11 @@ Neurone load(char* path)
     int nbOutput = 0;
     int biases = 0;
     int content = 0;
-    // Load header.
+    /*  Load header. */
     int header = fscanf(file, "%d %d %d\n", &nbInput, &nbHidden, &nbOutput);
-    // Build a new tinn.
+    /*  Build a new tinn. */
     Neurone n = neuronal(nbInput, nbHidden, nbOutput);
-    // Load biases and weights.
+    /*  Load biases and weights. */
     for(int i = 0; i < n.nbBias; i++)
     {
       biases = fscanf(file, "%f\n", &n.bias[i]);
@@ -34,13 +34,13 @@ Neurone load(char* path)
     return n;
 }
 
-// Save all weights in a save file
+/*  Save all weights in a save file */
 void save(Neurone n, char* path)
 {
     FILE* file = fopen(path, "w");
-    // Save header.
+    /*  Save header. */
     fprintf(file, "%d %d %d\n", n.nbInputs, n.nbHiddens, n.nbOutputs);
-    // Save biases and weights.
+    /*  Save biases and weights. */
     for(int i = 0; i < n.nbBias; i++)
     {
       fprintf(file, "%f\n", (double) n.bias[i]);
@@ -52,7 +52,7 @@ void save(Neurone n, char* path)
     fclose(file);
 }
 
-// Random datas in the Data structure
+/*  Random datas in the Data structure */
 void randShuffle(Data data)
 {
     for(int i = 0; i < data.nbRows; i++)
@@ -69,7 +69,7 @@ void randShuffle(Data data)
     }
 }
 
-// Free data components.
+/*  Free data components. */
 void freeData(Data data)
 {
     for(int i = 0; i < data.nbRows; i++)

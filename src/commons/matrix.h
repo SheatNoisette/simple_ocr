@@ -10,8 +10,8 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 
-//----------------------------------
-// Structures
+/* ---------------------------------- */
+/*  Structures */
 
 typedef struct
 {
@@ -21,8 +21,8 @@ typedef struct
     int *content;
 } matrix;
 
-//----------------------------------
-// Virtual functions
+/* ---------------------------------- */
+/*  Virtual functions */
 
 matrix* create_matrix (unsigned int width, unsigned int height);
 

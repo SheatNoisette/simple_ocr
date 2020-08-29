@@ -13,8 +13,8 @@
 #include "../bitmap/image.h" 
 #include "../commons/linked_list.h" 
 
-//-------------------------
-//Functions
+/* ------------------------- */
+/* Functions */
 
 char r_find_pixel_horizontal
 (image *input, unsigned int x_from, unsigned int y, unsigned int x_to);

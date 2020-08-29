@@ -17,21 +17,21 @@
 
 matrix* create_matrix (unsigned int width, unsigned int height) {
 
-    //Create a basic pointer for the struct
+    /* Create a basic pointer for the struct */
     matrix *new_array = malloc(sizeof(matrix));
 
-    //Check malloc 
+    /* Check malloc */
     if (new_array == NULL) {
         printf("[Matrix] Failed to create a matrix");
         return NULL;
     }
 
-    //Set some properties
+    /* Set some properties */
     new_array->width = (unsigned int)width;
     new_array->height = (unsigned int)height;
     new_array->content = malloc(width * height * sizeof(int));
 
-    //Check if the memory alloc was successful
+    /* Check if the memory alloc was successful */
     if (new_array->content == NULL) {
         printf("[Matrix] Failed to allocate matrix content");
         return NULL;
@@ -46,7 +46,7 @@ matrix* create_matrix (unsigned int width, unsigned int height) {
 
 void free_matrix (matrix *selected_matrix) {
 
-    //Check if matrix exists
+    /* Check if matrix exists */
     if (selected_matrix == NULL) {
         printf("[Matrix] Trying to released a invalid matrix\n");
         return;
@@ -76,6 +76,6 @@ void set_value_matrix
 
     unsigned int matrix_position = x + i_matrix->width * y;
 
-    //Set value
+    /* Set value */
     i_matrix->content[matrix_position] = value;
 }

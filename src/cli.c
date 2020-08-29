@@ -6,7 +6,7 @@
 ** Started on  2019 SheatNoisette
 */
 
-//Check if we try to compile to WASM
+/* Check if we try to compile to WASM */
 #ifdef wasm
     #define errx(std, message) printf(message)
 #else
@@ -48,7 +48,7 @@
 #include "neural/load.h"
 #include "neural/maths.h"
 
-//Command line system for OCR
+/* Command line system for OCR */
 
 /*
 ** Parse input from app arguments
@@ -56,44 +56,44 @@
 
 void cli_parse_commands(int argc, char **argv) {
 
-    //Check number of arguments
+    /* Check number of arguments */
 
-    //No arguments
+    /* No arguments */
     if (argc == 1) {
         cli_print_help();
         return;
     }
 
-    //Current params
+    /* Current params */
     int opt;
-    //File to load
+    /* File to load */
     char *img_file = NULL;
-    //Turn on visualization
+    /* Turn on visualization */
     unsigned char full_visual = 0;
-    //Otsu binarization
+    /* Otsu binarization */
     unsigned char enable_otsu = 0;
-    //Force SDL loading
+    /* Force SDL loading */
     unsigned char force_sdl = 0;
-    //Force train neural network
+    /* Force train neural network */
     unsigned char train_nn = 0;
-    //Train output
+    /* Train output */
     char *train_out_file = NULL;
-    //Dataset path
+    /* Dataset path */
     char *dataset_path = NULL;
-    //Convolutional filter needed to be added
+    /* Convolutional filter needed to be added */
     char *convolution_filters = NULL;
-    //Output from OCE
+    /* Output from OCE */
     char *ocr_out = NULL;
       
     while((opt = getopt(argc, argv, ":i:hvosf:t:d:w:")) != -1)  
     {  
-        // Image input
+        /*  Image input */
         if (opt == 'i') {
             img_file = optarg;
         } else if (opt == 'h') {
-        //Print help
+        /* Print help */
         cli_print_help();
-        //Turn on full visualisation of the detection of the chars
+        /* Turn on full visualisation of the detection of the chars */
         } else if (opt == 'v') {
             full_visual = 1;
         } else if (opt == 'o') {
@@ -114,19 +114,19 @@ void cli_parse_commands(int argc, char **argv) {
         }
     }
     
-    //Train NN
+    /* Train NN */
     if (train_nn) {
         train_neural_network(train_out_file, dataset_path);
     }
-    //Check if image is valid
+    /* Check if image is valid */
     else if (img_file != NULL) {
         ocr_out = ocr_run(
             img_file, full_visual, enable_otsu, force_sdl, 
             convolution_filters, train_out_file
             );
-        //Get output from OCR
+        /* Get output from OCR */
         printf("\n%s\n", ocr_out);
-        //Free string
+        /* Free string */
         free(ocr_out);
     } else {
         cli_print_help();
@@ -144,7 +144,7 @@ void cli_parse_commands(int argc, char **argv) {
 */
 void cli_print_logo() {
 
-    //Ugly way to print a logo
+    /* Ugly way to print a logo */
     printf("      ___           ___           ___\n");
     printf("     /\\  \\         /\\  \\         /\\  \\ \n");
     printf("    /::\\  \\       /::\\  \\       /::\\  \\ \n");
@@ -164,10 +164,10 @@ void cli_print_logo() {
 */
 void cli_print_help() {
 
-    //Print logo and help
+    /* Print logo and help */
     cli_print_logo();
 
-    //Help
+    /* Help */
     printf("COMMANDS:\n");
     printf("-t <File>   Run neural network training and save generated\n");
     printf("            training data in <file> (default: train_data.txt)\n");

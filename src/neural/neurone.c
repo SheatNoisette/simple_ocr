@@ -4,7 +4,7 @@
 #include "neurone.h"
 #include "train_net.h"
 
-// Randomizes neurone weights and biases.
+/*  Randomizes neurone weights and biases. */
 void init_neurone(Neurone n)
 {
     for(int i = 0; i < n.nbWeight; i++)
@@ -17,7 +17,7 @@ void init_neurone(Neurone n)
     }
 }
 
-// Constructs a neurone with number of inputs, number of hidden neurons, and number of outputs
+/*  Constructs a neurone with number of inputs, number of hidden neurons, and number of outputs */
 Neurone neuronal(int nbInput, int nbHidden, int nbOutput)
 {
     Neurone n;
@@ -36,7 +36,7 @@ Neurone neuronal(int nbInput, int nbHidden, int nbOutput)
     return n;
 }
 
-// Prints the char recognised
+/*  Prints the char recognised */
 char printD(float* array, int size)
 {
     char dataset[] = "0123456789abcdefghijklmnopqrstuvwxyz";
@@ -44,10 +44,10 @@ char printD(float* array, int size)
     int count = 0;
     for(int i = 0; i < size; i++)
     {
-      //printf("%f ", sigmoid(array[i]));
+      /* printf("%f ", sigmoid(array[i])); */
       tab[i] = (sigmoid(array[i]));
     }
-    //printf("\n");
+    /* printf("\n"); */
     for(int j = 0; j < 36; j++)
     {
       if(tab[count] < tab[j])
@@ -58,14 +58,14 @@ char printD(float* array, int size)
     return dataset[count];
 }
 
-// Return expected value we should get at this end for a output neuron
+/*  Return expected value we should get at this end for a output neuron */
 float* prediction(Neurone n, float* input)
 {
     feedforward(n, input);
     return (n.output);
 }
 
-// Free all data of a neuron
+/*  Free all data of a neuron */
 void freez(Neurone n)
 {
     free(n.weight);

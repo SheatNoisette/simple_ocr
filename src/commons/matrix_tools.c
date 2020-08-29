@@ -17,13 +17,13 @@
 */
 void pretty_print_matrix(matrix *input) {
 
-    //Check the matrix
+    /* Check the matrix */
     if (input == NULL) {
         printf("[Matrix] Matrix print: Invalid matrix\n");
         return;
     }
 
-    //Get size of the matrix
+    /* Get size of the matrix */
     unsigned int matrix_height = input->height;
     unsigned int matrix_width = input->width;
 
@@ -45,10 +45,10 @@ float *matrix_to_float_array(matrix *input) {
     unsigned int matrix_height = input->height;
     unsigned int matrix_width = input->width;
 
-    //Create the array
+    /* Create the array
     float *array = malloc(sizeof(float) * matrix_height * matrix_width);
 
-    //Iterate to fill the array
+    /* Iterate to fill the array
     for (unsigned int y = 0; y < matrix_height; y++) {
         for (unsigned int x = 0; x < matrix_width; x++) {
             array[x + matrix_width * y] = (float) get_value_matrix(input, x, y);

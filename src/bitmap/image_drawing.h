@@ -7,16 +7,16 @@
 ** Started on  2019 SheatNoisette
 */
 
-//Draw simple figure in our image type
+/* Draw simple figure in our image type */
 
 #ifndef IMAGE_DRAWING_H
 #define IMAGE_DRAWING_H
 
-//Include our image type
+/* Include our image type */
 #include "image.h"
 
-//-------------------------
-// Functions
+/* ------------------------- */
+/*  Functions */
 
 void image_draw_line_h
 (image *input, unsigned int x1, unsigned int x2, unsigned int y, 

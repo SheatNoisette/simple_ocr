@@ -10,8 +10,8 @@
 #ifndef MATRIX_TOOLS_H
 #define MATRIX_TOOLS_H
 
-//----------------------------------
-// Virtual functions
+/* ---------------------------------- */
+/*  Virtual functions */
 
 void pretty_print_matrix(matrix *input);
 

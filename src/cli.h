@@ -10,8 +10,8 @@
 #ifndef CLI_H
 #define CLI_H
 
-//---------------------------
-//Functions
+/* --------------------------- */
+/* Functions */
 
 void cli_parse_commands(int argc, char **argv);
 

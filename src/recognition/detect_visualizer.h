@@ -6,15 +6,15 @@
 **
 ** Started on  2019 SheatNoisette
 */
-// Visualize data on image
+/*  Visualize data on image */
 
 #ifndef DETECT_VISUALIZER_H
 #define DETECT_VISUALIZER_H
 
 #include "../bitmap/image.h"
 
-//------------------------
-// Functions
+/* ------------------------  */
+/*  Functions */
 void visu_draw_border_box (image *input, int *border_box, 
 unsigned char r, unsigned char g, unsigned char b);
 void visu_draw_y_char_pos (image *input, l_list *y_positions, int *border_box,

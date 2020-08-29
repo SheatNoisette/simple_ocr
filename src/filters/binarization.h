@@ -12,8 +12,8 @@
 
 #include "../bitmap/image.h"
 
-//---------------------------
-// Functions
+/* --------------------------- */
+/*  Functions */
 
 void i_binarization_threshold(image *input, unsigned char threshold);
 void i_otsu_method_binarization(image *input);

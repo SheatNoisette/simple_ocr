@@ -3,7 +3,7 @@
 #include <string.h>
 #include "train_data.h"
 
-// Returns the number of lines in a file.
+/*  Returns the number of lines in a file. */
 int nbLines(FILE* file)
 {
     int ch = EOF;
@@ -21,11 +21,11 @@ int nbLines(FILE* file)
     {
       lines += 1;
     }
-    rewind(file); //The function moves the file position indicator to the beginning of the specified stream, while also clearing the error and EOF flags associated with that stream.
+    rewind(file); /* The function moves the file position indicator to the beginning of the specified stream, while also clearing the error and EOF flags associated with that stream. */
     return lines;
 }
 
-// Reads a line from a file.
+/*  Reads a line from a file. */
 char* readLines(FILE* file)
 {
     int chare = EOF;
@@ -44,7 +44,7 @@ char* readLines(FILE* file)
     return line;
 }
 
-// New 2D array of floats
+/*  New 2D array of floats */
 float** new2d(int rows, int cols)
 {
     float** row = (float**) malloc((rows) * sizeof(float*));
@@ -55,16 +55,16 @@ float** new2d(int rows, int cols)
     return row;
 }
 
-// New data for the Data struct
+/*  New data for the Data struct */
 Data newData(int nbInput, int nbOutput, int rows)
 {
     Data data = { new2d(rows, nbInput), new2d(rows, nbOutput), nbInput, nbOutput, rows };
     return data;
 }
 
-// Gets one row of inputs and outputs from a string.
-// atof : converts a string into a floating point numerical representation
-// strtok : breaks string and remove 2nd param (of the function) in the string
+/*  Gets one row of inputs and outputs from a string. */
+/*  atof : converts a string into a floating point numerical representation */
+/*  strtok : breaks string and remove 2nd param (of the function) in the string */
 void parse(Data data, char* line, int row)
 {
     int cols = data.nbInputs + data.nbOutputs;
@@ -82,7 +82,7 @@ void parse(Data data, char* line, int row)
     }
 }
 
-// Parse file in order to get all input
+/*  Parse file in order to get all input */
 Data build(char* path, int nbInput, int nbOutput)
 {
     FILE* file = fopen(path, "r");

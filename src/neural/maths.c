@@ -8,7 +8,7 @@
 #include "neurone.h"
 #include "maths.h"
 
-// Prints an array of floats
+/*  Prints an array of floats */
 void printN(float* array, int size)
 {
     for(int i = 0; i < size; i++)
@@ -23,14 +23,14 @@ float randomize()
   return (rand() / (float)RAND_MAX);
 }
 
-// Another activation function
+/*  Another activation function */
 float mish(float x)
 {
 	x = (x * tanh(log(1 + exp(x))));
 	return x;
 }
 
-// Derivate of the mish function
+/*  Derivate of the mish function */
 float dMish(float x)
 {
 	float y = exp(3*x) + 4*exp(2*x) + (6+4*x)*exp(x) + 4*(1+x);
@@ -46,20 +46,20 @@ float dMish(float x)
 	}
 }
 
-// returns a float between 0 and 1
+/*  returns a float between 0 and 1 */
 float sigmoid(float x)
 {
 	return (1 / (1 + exp(-x)));
 }
 
-// Derivate of the sigmoid function
+/*  Derivate of the sigmoid function */
 float dSigmoid(float x)
 {
 	x = sigmoid(x);
 	return (x * (1 - x));
 }
 
-// These tree functions below determined the error
+/*  These tree functions below determined the error */
 float mse_loss(float y_true, float y_pred)
 {
 	return (pow((y_true - y_pred), 2));
