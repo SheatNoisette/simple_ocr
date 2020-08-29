@@ -171,12 +171,24 @@ char *ocr_run (
     /* Output text */
     char *output_text = NULL;
 
+    /* Neural Network definition */
+    Neurone neural_network;
+
+    /* Get y positions */
+    l_list *lines_char_y;
+
+    /* Char position */
+    l_list *char_pos;
+
+    /* Text structure */
+    l_list *text_structure;
+
     /* If train_weight is NULL, set the default name */
     if (train_weight == NULL)
         train_weight = "train_data.txt";
 
     /* Create NN from file */
-    Neurone neural_network = load(train_weight);
+    neural_network = load(train_weight);
 
     /* Force SDL File loading */
     if (force_sdl) {
@@ -222,10 +234,10 @@ char *ocr_run (
     border_table = r_get_paragraph_border(ocr_image);
 
     /* Get y positions */
-    l_list *lines_char_y = r_find_char_y(ocr_image, 0, ocr_image->width);
+    lines_char_y = r_find_char_y(ocr_image, 0, ocr_image->width);
     
     /* Get char position */
-    l_list *char_pos = r_find_char_image(ocr_image, lines_char_y);
+    char_pos = r_find_char_image(ocr_image, lines_char_y);
 
     /* Visualization of the char positions */
     if (visual) {
@@ -250,7 +262,7 @@ char *ocr_run (
     
     /* Determine text structure */
     printf("[OCR] Getting text structure ...\n");
-    l_list *text_structure = deduct_text_structure(char_pos);
+    text_structure = deduct_text_structure(char_pos);
 
     /* Get characters recongnised */
     output_text = get_text_ocr (
@@ -277,6 +289,26 @@ char *ocr_run (
 */
 void train_neural_network(char *train_path, char *dataset_path) {
 
+    /* Neural Network parameters */
+    int nbInput;
+    int nbHidden;
+    int nbOutput;
+    float rate;
+    float down;
+    int iterations;
+    float errors; /* Error rate */
+    float* input; /* Input neuron */
+    float* neurone; /* Current neurons */
+
+    /*  Training data */
+    Data data;
+
+    /* Neural network */
+    Neurone neuron;
+
+    /* Iterators */
+    int i;
+    int j;
 
     /* Set default values if the pointer is null */
     if (train_path == NULL) {
@@ -291,30 +323,28 @@ void train_neural_network(char *train_path, char *dataset_path) {
 
     srand(time(0));
 
-    int nbInput = 256;
-    int nbHidden = 36;
-    int nbOutput = 36; /*  26 letters + 10 numbers */
+    nbInput = 256;
+    nbHidden = 36;
+    nbOutput = 36; /*  26 letters + 10 numbers */
 
-    float rate = 0.01f; /*  learning rate */
-    float down = 0.99f;
-    int iterations = 1000; /*  number of training session */
+    rate = 0.01f; /*  learning rate */
+    down = 0.99f;
+    iterations = 1000; /*  number of training session */
 
     /*  Training data */
-    Data data = build(dataset_path, nbInput, nbOutput);
+    data = build(dataset_path, nbInput, nbOutput);
 
     /*  Train NN */
-    Neurone neuron = neuronal(nbInput, nbHidden, nbOutput);
+    neuron = neuronal(nbInput, nbHidden, nbOutput);
 
-    int i;
     for(i = 0; i < iterations; i++)
     {
         randShuffle(data);
-        float errors = 0.0f;
-        int j = 0;
+        errors = 0.0f;
         for (j = 0; j < data.nbRows; j++)
         {
-            float* input = data.input[j];
-            float* neurone = data.neurone[j];
+            input = data.input[j];
+            neurone = data.neurone[j];
             errors += train_Neural(neuron, input, neurone, rate);
         }
         rate *= down;
@@ -322,7 +352,7 @@ void train_neural_network(char *train_path, char *dataset_path) {
 
     /*  Save of the neural network */
     printf("[Neural] Saving training data to %s...\n", train_path);
-    save(neuron, train_path);
-    freez(neuron);
+        save(neuron, train_path);
     printf("[Neural] Training done!\n");
+    freez(neuron);
 }

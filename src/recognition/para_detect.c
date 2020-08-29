@@ -22,6 +22,10 @@
 
 int *r_get_paragraph_border(image *img) {
 
+    /* Cursor used troughout the algorithm */
+    int x_cursor = 0;
+    int y_cursor = 0;
+
     /* Get image size */
     int image_width = img->width;
     int image_height = img->height;
@@ -41,10 +45,6 @@ int *r_get_paragraph_border(image *img) {
     border[2] = 0; /* x2 */
     border[3] = 0; /* y2 */
 
-    /* Cursor used troughout the algorithm */
-    int x_cursor = 0;
-    int y_cursor = 0;
-    
     /* ----------------- */
     /* Find top */ 
 

@@ -67,6 +67,12 @@ unsigned long list_length(l_list *list){
 
 int list_get_value(l_list *list, int pos) {
 
+    /* Current position */
+    unsigned long current_pos = 0;
+
+     /* Calculate real item position */
+    unsigned long realpos;
+
     /* Size of the list */
     int length = (int) list_length(list);
 
@@ -75,11 +81,8 @@ int list_get_value(l_list *list, int pos) {
         return -1;
     }
 
-    /* Current position */
-    unsigned long current_pos = 0;
-
     /* Calculate real position - hotfix */
-    unsigned long realpos = length - pos - 1;
+    realpos = length - pos - 1;
 
     /* Check OoB */
     if (pos > length) {
@@ -101,6 +104,12 @@ int list_get_value(l_list *list, int pos) {
 
 void list_set_value(l_list *list, int pos, int value) {
 
+    /* Current position */
+    unsigned long current_pos = 0;
+
+     /* Calculate real item position */
+    unsigned long realpos;
+
     /* Size of the list */
     int length = (int) list_length(list);
 
@@ -109,11 +118,8 @@ void list_set_value(l_list *list, int pos, int value) {
         return;
     }
 
-    /* Current position */
-    unsigned long current_pos = 0;
-
     /* Calculate real position - hotfix */
-    unsigned long realpos = length - pos - 1;
+    realpos = length - pos - 1;
 
     /* Check OoB */
     if (pos > length) {
@@ -153,16 +159,17 @@ void list_free(l_list *list) {
 */
 
 void list_print(l_list *list) {
+
+    /* Current position */
+    unsigned long current = 0;
     
     /* Get length */
     unsigned long length = list_length(list);
 
     /* Check list size */
-    if (length == 0)
+    if (length == 0) {
         return;
-
-    /* Current position */
-    unsigned long current = 0;
+    }
 
     while (current < length) {
         printf("%i ", list_get_value(list, current));

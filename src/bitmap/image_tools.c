@@ -30,6 +30,9 @@ image *crop_image_at (
     unsigned int x;
     unsigned int y;
 
+    /* Pointer of the cropped image */
+    image *cropped_img;
+
     /* Get original image size */
     unsigned int image_width = (unsigned int) img->width;
     unsigned int image_height = (unsigned int) img->height;
@@ -45,7 +48,7 @@ image *crop_image_at (
     /* Do the cropping */
     /* Create image */
     /* printf("%u %u %u %u %u %u\n", x1, y1, x2, y2, x2 - x1, y2 - y1); */
-    image *cropped_img = create_image(x2 - x1, y2 - y1);
+    cropped_img = create_image(x2 - x1, y2 - y1);
 
     for (y = y1; y < y2; y++)
     {
@@ -78,7 +81,15 @@ image *image_resize_linear_interp
 
     /* New coordinates for input image (pixel reference) */
     unsigned int new_x; 
-    unsigned int new_y; 
+    unsigned int new_y;
+
+    /* Image size property */
+    unsigned int image_width;
+    unsigned int image_height;
+
+
+    /* Resized image */
+    image *resized_img;
 
     /* Check if the image exists */
     if (img == NULL) {
@@ -87,11 +98,11 @@ image *image_resize_linear_interp
     }
 
     /* Create our new image */
-    image *resized_img = create_image(new_width, new_height);
+    resized_img = create_image(new_width, new_height);
 
     /* Get image size property */
-    unsigned int image_width = img->width;
-    unsigned int image_height = img->height;
+    image_width = img->width;
+    image_height = img->height;
 
     /* Apply the algorithm */
     for (y = 0; y < new_height; y++)
@@ -149,6 +160,8 @@ void image_to_binmatrix_fill (matrix *matrix_in, image *input_image) {
 ** Image must be already binarized to avoid unexpected output
 */
 matrix *image_to_binmatrix(image *input) {
+    /* New matrix */
+    matrix *converted_matrix;
 
     /* Check if the image exists */
     if (input == NULL) {
@@ -157,7 +170,7 @@ matrix *image_to_binmatrix(image *input) {
     }
 
     /* New matrix */
-    matrix *converted_matrix = create_matrix(input->width, input->height);
+    converted_matrix = create_matrix(input->width, input->height);
 
     image_to_binmatrix_fill(converted_matrix, input);
 

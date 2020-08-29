@@ -60,7 +60,15 @@ float** new2d(int rows, int cols)
 /*  New data for the Data struct */
 Data newData(int nbInput, int nbOutput, int rows)
 {
-    Data data = { new2d(rows, nbInput), new2d(rows, nbOutput), nbInput, nbOutput, rows };
+    /* Data data = { new2d(rows, nbInput), new2d(rows, nbOutput), nbInput, nbOutput, rows }; */
+    Data data;
+
+    data.input = new2d(rows, nbInput);
+    data.neurone = new2d(rows, nbInput);
+    data.nbInputs = nbInput;
+    data.nbOutputs = nbOutput;
+    data.nbRows = rows;
+
     return data;
 }
 
@@ -92,14 +100,17 @@ Data build(char* path, int nbInput, int nbOutput)
     int rows;
     int i;
     char *line = NULL;
-    FILE* file = fopen(path, "r");
+    Data data;
+    FILE* file;
+
+    file = fopen(path, "r");
     if(file == NULL)
     {
         printf("Could not open %s\n", path);
         exit(1);
     }
     rows = nbLines(file);
-    Data data = newData(nbInput, nbOutput, rows);
+    data = newData(nbInput, nbOutput, rows);
     for(i = 0; i < rows; i++)
     {
         line = readLines(file);

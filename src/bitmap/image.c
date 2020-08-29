@@ -147,6 +147,9 @@ image *create_image(unsigned int width, unsigned int height) {
     unsigned int y = 0;
     unsigned int x = 0;
 
+    /* Result image */
+    image *new_image;
+
     /* Check image size */
     if (width == 0 || height == 0) {
         printf("[Image] Image size can't be smaller than 1px * 1px\n");
@@ -154,7 +157,7 @@ image *create_image(unsigned int width, unsigned int height) {
     }
 
     /* Create an image type */
-    image *new_image = malloc(sizeof(image));
+    new_image = malloc(sizeof(image));
 
     /* Check malloc */
     if (new_image == NULL) {

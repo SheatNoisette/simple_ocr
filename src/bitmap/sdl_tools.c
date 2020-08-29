@@ -80,3 +80,6 @@ void putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
 }
 
 #endif
+
+/* This make the header ISO Compilant if SDL is not supported */
+typedef int SDL_HEADER_FIX;

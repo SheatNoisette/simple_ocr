@@ -56,13 +56,6 @@
 
 void cli_parse_commands(int argc, char **argv) {
 
-    /* Check number of arguments */
-
-    /* No arguments */
-    if (argc == 1) {
-        cli_print_help();
-        return;
-    }
 
     /* Current params */
     int opt;
@@ -85,6 +78,13 @@ void cli_parse_commands(int argc, char **argv) {
     /* Output from OCE */
     char *ocr_out = NULL;
       
+    /* Check number of arguments */
+    /* No arguments */
+    if (argc == 1) {
+        cli_print_help();
+        return;
+    }
+
     while((opt = getopt(argc, argv, ":i:hvosf:t:d:w:")) != -1)  
     {  
         /*  Image input */

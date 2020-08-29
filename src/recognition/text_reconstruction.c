@@ -83,7 +83,7 @@ l_list *deduct_text_structure (l_list *input_pos) {
     /* Number of characters present in the image */
     unsigned long number_char = list_length(input_pos) / 4;
 
-    /* Average size of a char
+    /* Average size of a char */
     /* unsigned long average_size = dt_get_average_char_size(input_pos, number_char); */
 
     /* Average separation of a char (Space between two char) */

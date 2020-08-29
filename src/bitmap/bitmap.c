@@ -106,6 +106,9 @@ image *passage_by_sdl(char* path,BITmap_Header* header) {
 image *bitmaploader(char* path) {
         /*  create a verification value */
         unsigned long test;
+        /* Current image pixels */
+        char *pixels;
+        char *pix;
         /*  create the image and the header. then make a copy of the header */
 
         image *image;
@@ -153,7 +156,7 @@ image *bitmaploader(char* path) {
         */
         if(he->dib != 40) {
             /* return a warning to inform that it can't be used by our loader and will be processed by SDL */
-            fprintf(stdout, "[bitmap] Warning: DIB error falling back to SDL\n");
+            printf("[bitmap] Warning: DIB error falling back to SDL\n");
 
             /* make a passage by sdl if possible */
             #ifdef SDL
@@ -175,7 +178,7 @@ image *bitmaploader(char* path) {
     {
         /* return a warning to inform that it can't be used by our loader and will be processed by SDL */
 
-        fprintf(stdout, "[bitmap] Warning: Bits per pixels error falling back to SDL\n");
+        printf("[bitmap] Warning: Bits per pixels error falling back to SDL\n");
 
         /* make a passage by sdl if possible */
         #ifdef SDL
@@ -198,7 +201,7 @@ image *bitmaploader(char* path) {
     {
         /* return a warning to inform that it can't be used by our loader and will be processed by SDL */
 
-        fprintf(stdout, "[bitmap] Warning: Bits per pixels error falling back to SDL\n");
+        printf("[bitmap] Warning: Bits per pixels error falling back to SDL\n");
 
         /* make a passage by sdl if possible */
         #ifdef SDL
@@ -217,7 +220,7 @@ image *bitmaploader(char* path) {
 
     /* create the pointer for the binary data */
 
-    char *pixels = (char*) malloc(he->image_size *sizeof(char));
+    pixels = (char*) malloc(he->image_size *sizeof(char));
     test = fread(pixels,1,he->image_size,file);
 
     /* check if the file was read correctly */
@@ -228,8 +231,7 @@ image *bitmaploader(char* path) {
     }
 
     /* copy of the pointer */
-
-    char *pix = pixels;
+    pix = pixels;
 
     /* use pixelize to put the pixels of the bitmap in their places */
 

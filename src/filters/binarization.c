@@ -56,7 +56,6 @@ void i_otsu_method_binarization (image *input) {
 
     /* Create histogram */
     unsigned char histogram[256];
-    memset(histogram, 0, 255);
 
     /* Weights */
     int background_weight = 0;
@@ -91,6 +90,9 @@ void i_otsu_method_binarization (image *input) {
 
     /* Threshold level */
     unsigned long level;
+
+    /* Clear histogram - Calloc can be used */
+    memset(histogram, 0, 255);
 
     for (y = 0; y < input->height; y++) {
         for (x = 0; x < input->width; x++){

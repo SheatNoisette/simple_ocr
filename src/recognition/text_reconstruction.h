@@ -12,7 +12,7 @@
 
 #include "../commons/linked_list.h"
 
-/* ---------------------------------------
+/* --------------------------------------- */
 /*  Functions */
 
 unsigned long dt_get_average_char_size(l_list *input_pos, unsigned long number_chars);

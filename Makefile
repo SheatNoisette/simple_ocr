@@ -1,6 +1,6 @@
 # Override C compiler
 CC=gcc
-CFLAGS = -W -Wall -Wextra -std=c89 -MMD
+CFLAGS = -W -Wall -Wextra -pedantic-errors -std=c89 -MMD
 LDFLAGS = -lm
 
 SDLFLAGS = -lSDL2 -D SDL

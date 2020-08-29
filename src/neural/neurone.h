@@ -33,7 +33,7 @@ Neurone neuronal(int nbInput, int nbHidden, int nbOutput);
 
 char printD(float* array, int size);
 
-float* prediction(Neurone n, float* input); ;
+float* prediction(Neurone n, float* input);
 
 void freez(Neurone n);
 

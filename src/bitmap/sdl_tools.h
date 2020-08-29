@@ -1,6 +1,6 @@
 /* 
  * Tools to manipulate any surface in SDL
- * http:/* sdl.beuc.net/sdl.wiki/Pixel_Access
+ * http:// sdl.beuc.net/sdl.wiki/Pixel_Access
  * THIS CODE IS GPL2 LICENSED
 */
 
