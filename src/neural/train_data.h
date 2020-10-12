@@ -1,6 +1,8 @@
 #ifndef TRAIN_DATA_H
 #define TRAIN_DATA_H
 
+#include <stdio.h>
+
 // Data struct.
 typedef struct Data Data;
 struct Data

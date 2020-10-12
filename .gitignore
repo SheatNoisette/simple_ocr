@@ -4,6 +4,7 @@ bin/
 tests/
 *test
 *.glade~
+.clang-format
 
 # WASM
 *.wasm

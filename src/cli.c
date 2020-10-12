@@ -6,133 +6,153 @@
 ** Started on  2019 SheatNoisette
 */
 
-//Check if we try to compile to WASM
+// Check if we try to compile to WASM
 #ifdef wasm
-    #define errx(std, message) printf(message)
+#    define errx(std, message) printf(message)
 #else
-    #include <err.h>
+#    include <err.h>
 #endif
 
 #include <ctype.h>
+#include <getopt.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <getopt.h>
-#include <unistd.h>
 #include <time.h>
+#include <unistd.h>
 #ifdef SDL
-    #include <SDL2/SDL.h>
+#    include <SDL2/SDL.h>
 #endif
 
+#include "bitmap/bitmap.h"
+#include "bitmap/image.h"
+#include "bitmap/image_drawing.h"
+#include "bitmap/image_tools.h"
 #include "cli.h"
-#include "ocr.h"
+#include "commons/linked_list.h"
 #include "commons/matrix.h"
 #include "commons/matrix_tools.h"
-#include "commons/linked_list.h"
-#include "bitmap/image.h"
-#include "bitmap/image_tools.h"
-#include "bitmap/bitmap.h"
-#include "bitmap/image_drawing.h"
-#include "filters/binarization.h"
 #include "filters/basic_filters.h"
+#include "filters/binarization.h"
 #include "filters/convolution_matrix.h"
 #include "filters/denoise_filter.h"
 #include "filters/sharpen_filter.h"
-#include "recognition/char_detect.h"
-#include "recognition/para_detect.h"
-#include "recognition/detect_visualizer.h"
-#include "recognition/text_reconstruction.h"
-#include "neural/neurone.h"
-#include "neural/train_net.h"
-#include "neural/train_data.h"
-#include "neural/load.h"
 #include "neural/load.h"
 #include "neural/maths.h"
+#include "neural/neurone.h"
+#include "neural/train_data.h"
+#include "neural/train_net.h"
+#include "ocr.h"
+#include "recognition/char_detect.h"
+#include "recognition/detect_visualizer.h"
+#include "recognition/para_detect.h"
+#include "recognition/text_reconstruction.h"
 
-//Command line system for OCR
+// Command line system for OCR
 
 /*
 ** Parse input from app arguments
 */
 
-void cli_parse_commands(int argc, char **argv) {
+void cli_parse_commands(int argc, char **argv)
+{
+    // Check number of arguments
 
-    //Check number of arguments
-
-    //No arguments
-    if (argc == 1) {
+    // No arguments
+    if (argc == 1)
+    {
         cli_print_help();
         return;
     }
 
-    //Current params
+    // Current params
     int opt;
-    //File to load
+    // File to load
     char *img_file = NULL;
-    //Turn on visualization
+    // Turn on visualization
     unsigned char full_visual = 0;
-    //Otsu binarization
+    // Otsu binarization
     unsigned char enable_otsu = 0;
-    //Force SDL loading
+    // Force SDL loading
     unsigned char force_sdl = 0;
-    //Force train neural network
+    // Force train neural network
     unsigned char train_nn = 0;
-    //Train output
+    // Train output
     char *train_out_file = NULL;
-    //Dataset path
+    // Dataset path
     char *dataset_path = NULL;
-    //Convolutional filter needed to be added
+    // Convolutional filter needed to be added
     char *convolution_filters = NULL;
-    //Output from OCE
+    // Output from OCE
     char *ocr_out = NULL;
-      
-    while((opt = getopt(argc, argv, ":i:hvosf:t:d:w:")) != -1)  
-    {  
+
+    while ((opt = getopt(argc, argv, ":i:hvosf:t:d:w:")) != -1)
+    {
         // Image input
-        if (opt == 'i') {
+        if (opt == 'i')
+        {
             img_file = optarg;
-        } else if (opt == 'h') {
-        //Print help
-        cli_print_help();
-        //Turn on full visualisation of the detection of the chars
-        } else if (opt == 'v') {
+        }
+        else if (opt == 'h')
+        {
+            // Print help
+            cli_print_help();
+            // Turn on full visualisation of the detection of the chars
+        }
+        else if (opt == 'v')
+        {
             full_visual = 1;
-        } else if (opt == 'o') {
+        }
+        else if (opt == 'o')
+        {
             enable_otsu = 1;
-        } else if (opt == 's') {
+        }
+        else if (opt == 's')
+        {
             force_sdl = 1;
-        } else if (opt == 'f') {
+        }
+        else if (opt == 'f')
+        {
             convolution_filters = optarg;
-        } else if (opt == 't') {
+        }
+        else if (opt == 't')
+        {
             train_nn = 1;
             train_out_file = optarg;
-        } else if (opt == 'w') {
+        }
+        else if (opt == 'w')
+        {
             train_out_file = optarg;
-        } else if (opt == 'd') {
+        }
+        else if (opt == 'd')
+        {
             dataset_path = optarg;
-        } else if (opt == '?') {
+        }
+        else if (opt == '?')
+        {
             printf("Unknown command\n");
         }
     }
-    
-    //Train NN
-    if (train_nn) {
+
+    // Train NN
+    if (train_nn)
+    {
         train_neural_network(train_out_file, dataset_path);
     }
-    //Check if image is valid
-    else if (img_file != NULL) {
-        ocr_out = ocr_run(
-            img_file, full_visual, enable_otsu, force_sdl, 
-            convolution_filters, train_out_file
-            );
-        //Get output from OCR
+    // Check if image is valid
+    else if (img_file != NULL)
+    {
+        ocr_out = ocr_run(img_file, full_visual, enable_otsu, force_sdl,
+                          convolution_filters, train_out_file);
+        // Get output from OCR
         printf("\n%s\n", ocr_out);
-        //Free string
+        // Free string
         free(ocr_out);
-    } else {
+    }
+    else
+    {
         cli_print_help();
     }
 }
-
 
 /*
 ** -----------------------------
@@ -142,9 +162,9 @@ void cli_parse_commands(int argc, char **argv) {
 /*
 ** Print OCR Logo
 */
-void cli_print_logo() {
-
-    //Ugly way to print a logo
+void cli_print_logo()
+{
+    // Ugly way to print a logo
     printf("      ___           ___           ___\n");
     printf("     /\\  \\         /\\  \\         /\\  \\ \n");
     printf("    /::\\  \\       /::\\  \\       /::\\  \\ \n");
@@ -162,12 +182,12 @@ void cli_print_logo() {
 /*
 ** Print help
 */
-void cli_print_help() {
-
-    //Print logo and help
+void cli_print_help()
+{
+    // Print logo and help
     cli_print_logo();
 
-    //Help
+    // Help
     printf("COMMANDS:\n");
     printf("-t <File>   Run neural network training and save generated\n");
     printf("            training data in <file> (default: train_data.txt)\n");

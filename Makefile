@@ -30,13 +30,13 @@ DEP = $(SRC:.c=.d)
 #WASM
 
 WASM_MAKEFILE = Makefile_wasm
-WASM_PARAMS = 
+WASM_PARAMS =
 
 # --------------------------------
 # Check if we are in debug mode
 ifdef debug
 	CFLAGS += $(DEBUGFLAGS)
-else 
+else
 	CFLAGS += $(RELEASEFLAGS)
 endif
 

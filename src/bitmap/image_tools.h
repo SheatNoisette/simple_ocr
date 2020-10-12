@@ -13,6 +13,7 @@
 //Imports
 #include <stddef.h>
 
+#include "../commons/matrix.h"
 #include "image.h"
 
 //------------------------------

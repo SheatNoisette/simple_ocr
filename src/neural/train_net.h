@@ -1,6 +1,8 @@
 #ifndef TRAIN_NET_H
 #define TRAIN_NET_H
 
+#include "neurone.h"
+
 void feedforward(Neurone n, float* input);
 
 void backprop(Neurone n, float* input, float* neurone, float rate);
